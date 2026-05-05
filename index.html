@@ -3,130 +3,977 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rangkuman Kuliah - Introduction to FinOps</title>
-  <meta name="description" content="Website rangkuman materi kuliah Cloud Computing - Introduction to FinOps" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="bg-orb orb-1"></div>
-  <div class="bg-orb orb-2"></div>
-  <div class="bg-grid"></div>
+  <title>Cloud Computing & FinOps</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-2: #0b1b31;
+      --card: rgba(255, 255, 255, 0.08);
+      --card-2: rgba(255, 255, 255, 0.12);
+      --text: #eef6ff;
+      --muted: #b7c8dd;
+      --line: rgba(255, 255, 255, 0.14);
+      --primary: #62d5ff;
+      --secondary: #9b8cff;
+      --accent: #7cffc4;
+      --danger: #ffb86b;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius: 24px;
+    }
 
-  <header class="hero">
-    <nav>
-      <span class="logo">FinOps Insight</span>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(98, 213, 255, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(155, 140, 255, 0.16), transparent 35%),
+        linear-gradient(180deg, var(--bg), #040812 70%);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    p {
+      color: var(--muted);
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(18px);
+      background: rgba(7, 17, 31, 0.76);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      box-shadow: 0 10px 30px rgba(98, 213, 255, 0.25);
+      color: #03101d;
+      font-weight: 900;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      position: relative;
+      padding: 96px 0 78px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .eyebrow,
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 14px;
+    }
+
+    .eyebrow::before,
+    .tag::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 20px var(--accent);
+    }
+
+    h1 {
+      font-size: clamp(2.75rem, 6vw, 5.7rem);
+      line-height: 0.96;
+      letter-spacing: -0.07em;
+      margin-bottom: 24px;
+    }
+
+    h1 span {
+      display: block;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.055em;
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 1.18rem;
+      margin-bottom: 10px;
+      letter-spacing: -0.025em;
+    }
+
+    .hero-text {
+      font-size: 1.12rem;
+      max-width: 720px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: var(--card);
+      transition: 0.25s ease;
+      font-weight: 700;
+    }
+
+    .btn.primary {
+      color: #03101d;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.25);
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 460px;
+      border-radius: 34px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04)),
+        radial-gradient(circle at 20% 10%, rgba(98, 213, 255, 0.24), transparent 35%),
+        radial-gradient(circle at 80% 90%, rgba(155, 140, 255, 0.22), transparent 35%);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 26px;
+      overflow: hidden;
+    }
+
+    .cloud-visual {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      opacity: 0.95;
+    }
+
+    .cloud {
+      width: 230px;
+      height: 120px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(98, 213, 255, 0.9), rgba(124, 255, 196, 0.9));
+      position: relative;
+      box-shadow: 0 30px 90px rgba(98, 213, 255, 0.32);
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .cloud::before,
+    .cloud::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: inherit;
+    }
+
+    .cloud::before {
+      width: 120px;
+      height: 120px;
+      left: 35px;
+      top: -60px;
+    }
+
+    .cloud::after {
+      width: 140px;
+      height: 140px;
+      right: 30px;
+      top: -76px;
+    }
+
+    .metric {
+      position: absolute;
+      z-index: 2;
+      width: 170px;
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(6, 17, 31, 0.72);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.45rem;
+      color: var(--text);
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .metric.one {
+      top: 34px;
+      left: 28px;
+    }
+
+    .metric.two {
+      right: 28px;
+      top: 128px;
+    }
+
+    .metric.three {
+      left: 58px;
+      bottom: 48px;
+    }
+
+    .section {
+      padding: 82px 0;
+    }
+
+    .section > p,
+    .section .lead {
+      max-width: 860px;
+      font-size: 1.05rem;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .panel,
+    .floating-card,
+    .cards article {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 12px 45px rgba(0, 0, 0, 0.22);
+    }
+
+    .panel {
+      padding: 28px;
+    }
+
+    .panel h3 {
+      color: var(--accent);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .cards.two {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cards.four {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .cards article {
+      padding: 24px;
+      transition: 0.28s ease;
+    }
+
+    .cards article:hover {
+      transform: translateY(-6px);
+      background: var(--card-2);
+      border-color: rgba(98, 213, 255, 0.35);
+    }
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      color: #03101d;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      font-weight: 900;
+    }
+
+    .phase-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 26px;
+      list-style: none;
+      counter-reset: item;
+    }
+
+    .phase-list li {
+      counter-increment: item;
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--line);
+    }
+
+    .phase-list li::before {
+      content: counter(item);
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #03101d;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      font-weight: 900;
+    }
+
+    .phase-list strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .phase-list span {
+      color: var(--muted);
+    }
+
+    .table-wrap {
+      margin-top: 26px;
+      overflow-x: auto;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: var(--card);
+    }
+
+    table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 18px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--accent);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    td {
+      color: var(--muted);
+    }
+
+    td:first-child {
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .quote {
+      padding: 34px;
+      border-left: 4px solid var(--accent);
+      background: linear-gradient(135deg, rgba(124, 255, 196, 0.1), rgba(98, 213, 255, 0.06));
+      border-radius: 24px;
+      margin-top: 28px;
+      font-size: 1.15rem;
+      color: var(--text);
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .timeline .floating-card {
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timeline span {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #03101d;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .highlight {
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .summary-box {
+      margin-top: 30px;
+      padding: 30px;
+      border-radius: 28px;
+      background:
+        linear-gradient(135deg, rgba(98, 213, 255, 0.12), rgba(155, 140, 255, 0.1)),
+        rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--line);
+    }
+
+    .summary-box ul {
+      margin-top: 18px;
+      padding-left: 22px;
+      color: var(--muted);
+    }
+
+    .summary-box li {
+      margin-bottom: 10px;
+    }
+
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-18px);
+      }
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        min-height: 390px;
+      }
+
+      .cards,
+      .cards.two,
+      .cards.four,
+      .timeline {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .container,
+      .nav-inner {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .hero {
+        padding-top: 62px;
+      }
+
+      .cards,
+      .cards.two,
+      .cards.four,
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+
+      .metric {
+        width: 145px;
+        padding: 13px;
+      }
+
+      .metric.two {
+        top: 110px;
+      }
+
+      .cloud {
+        width: 190px;
+        height: 96px;
+      }
+
+      .cloud::before {
+        width: 100px;
+        height: 100px;
+        top: -50px;
+      }
+
+      .cloud::after {
+        width: 115px;
+        height: 115px;
+        top: -62px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a class="brand" href="#">
+        <span class="logo">CF</span>
+        <span>Cloud & FinOps</span>
+      </a>
+
       <div class="nav-links">
-        <a href="#rangkuman">Rangkuman</a>
-        <a href="#framework">Framework</a>
+        <a href="#cloud">Cloud</a>
+        <a href="#layanan">Layanan</a>
+        <a href="#deployment">Model</a>
+        <a href="#finops">FinOps</a>
         <a href="#kesimpulan">Kesimpulan</a>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <section class="hero-content reveal">
-      <p class="tag">Materi Kuliah Cloud Computing</p>
-      <h1>Introduction to <span>FinOps</span></h1>
-      <p>
-        Ringkasan singkat mengenai konsep Financial Operations untuk membantu organisasi
-        mengelola biaya cloud secara efisien, transparan, dan selaras dengan nilai bisnis.
-      </p>
-      <div class="hero-actions">
-        <a class="button primary" href="#rangkuman">Mulai Membaca</a>
-        <a class="button secondary" href="#framework">Lihat Framework</a>
-      </div>
-    </section>
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="reveal">
+        <p class="eyebrow">Rangkuman Lengkap</p>
+        <h1>Cloud Computing <span>& FinOps</span></h1>
+        <p class="hero-text">
+          Website ini merangkum konsep utama cloud computing dan FinOps, mulai dari
+          pengertian cloud, karakteristik, jenis layanan, deployment model, manfaat,
+          tantangan, tren teknologi, hingga cara mengelola biaya cloud agar menghasilkan
+          nilai bisnis yang optimal.
+        </p>
 
-    <div class="hero-stats reveal">
-      <div class="stat-card floating-card delay-1">
-        <span>Fokus Utama</span>
-        <strong>Efisiensi biaya cloud</strong>
+        <div class="hero-actions">
+          <a href="#cloud" class="btn primary">Mulai Baca</a>
+          <a href="#finops" class="btn">Pelajari FinOps</a>
+        </div>
       </div>
-      <div class="stat-card floating-card delay-2">
-        <span>Framework</span>
-        <strong>Inform • Optimize • Operate</strong>
-      </div>
-      <div class="stat-card floating-card delay-3">
-        <span>Tujuan</span>
-        <strong>Maksimalkan nilai bisnis</strong>
+
+      <div class="hero-card reveal">
+        <div class="cloud-visual">
+          <div class="cloud"></div>
+        </div>
+
+        <div class="metric one">
+          <strong>Cloud</strong>
+          <span>Akses resource komputasi melalui internet</span>
+        </div>
+
+        <div class="metric two">
+          <strong>FinOps</strong>
+          <span>Kolaborasi biaya, teknologi, dan bisnis</span>
+        </div>
+
+        <div class="metric three">
+          <strong>Value</strong>
+          <span>Fokus pada nilai, bukan sekadar hemat</span>
+        </div>
       </div>
     </div>
   </header>
 
   <main>
-    <section id="rangkuman" class="section reveal">
-      <p class="tag">Pertemuan yang dipilih</p>
-      <h2>Definisi dan Latar Belakang FinOps</h2>
-      <p>
-        FinOps atau <em>Financial Operations</em> adalah praktik budaya sekaligus kerangka kerja operasional
-        yang menyatukan tim teknologi, keuangan, dan bisnis. Tujuannya bukan hanya memangkas biaya,
-        tetapi memaksimalkan nilai bisnis dari setiap biaya cloud yang dikeluarkan.
+    <section id="cloud" class="section container reveal">
+      <p class="tag">Pengantar</p>
+      <h2>Apa itu Cloud Computing?</h2>
+      <p class="lead">
+        Cloud computing atau komputasi awan adalah model layanan komputasi yang memungkinkan
+        pengguna memakai sumber daya seperti server, penyimpanan, jaringan, aplikasi, dan daya
+        pemrosesan melalui internet. Dengan cloud, layanan tidak harus dijalankan pada komputer
+        lokal, tetapi dapat diakses dari mana saja selama tersedia koneksi jaringan.
       </p>
-      <p>
-        Pada model tradisional, perusahaan mengeluarkan investasi besar di awal untuk membeli infrastruktur
-        fisik. Sedangkan pada model cloud, biaya berubah menjadi biaya operasional berbasis pemakaian
-        (<em>pay-as-you-go</em>). Model ini fleksibel, namun jika tidak dikelola dengan baik bisa memunculkan
-        pemborosan dan biaya yang sulit diprediksi.
+      <br />
+      <p class="lead">
+        Konsep cloud computing berkembang dari komputasi terdistribusi dan grid computing.
+        Penyedia layanan cloud mengelola infrastruktur utama, sedangkan pengguna dapat memakai
+        layanan sesuai kebutuhan tanpa harus membeli, memasang, dan merawat perangkat keras sendiri.
       </p>
+
+      <div class="quote">
+        Cloud computing mengubah cara organisasi memakai teknologi: dari membeli infrastruktur
+        sendiri menjadi menggunakan layanan digital yang fleksibel, elastis, dan berbasis pemakaian.
+      </div>
     </section>
 
-    <section class="cards reveal">
-      <article>
-        <h3>Masalah Utama</h3>
-        <p>
-          Banyak biaya cloud terbuang karena resource yang idle, tidak efisien, atau dibuat melebihi kebutuhan.
-          Hal ini sering terjadi karena kurangnya monitoring, tagging, dan kebijakan penggunaan resource.
-        </p>
-      </article>
-      <article>
-        <h3>Tujuan FinOps</h3>
-        <p>
-          FinOps membantu organisasi memahami biaya cloud, menemukan peluang penghematan, dan membangun
-          tanggung jawab bersama antara tim engineering, finance, product owner, dan eksekutif.
-        </p>
-      </article>
-      <article>
-        <h3>Nilai Bisnis</h3>
-        <p>
-          FinOps tidak hanya bertanya “berapa biayanya?”, tetapi juga “berapa biaya untuk menghasilkan satu
-          transaksi atau satu unit nilai bisnis?”. Inilah yang membuat FinOps berorientasi pada hasil.
-        </p>
-      </article>
+    <section class="section container reveal">
+      <p class="tag">Karakteristik</p>
+      <h2>Karakteristik Utama Cloud Computing</h2>
+
+      <div class="cards">
+        <article>
+          <div class="icon">1</div>
+          <h3>Resource Pooling</h3>
+          <p>
+            Sumber daya seperti CPU, memori, storage, dan bandwidth dikumpulkan oleh penyedia
+            layanan untuk melayani banyak pengguna secara efisien.
+          </p>
+        </article>
+
+        <article>
+          <div class="icon">2</div>
+          <h3>Broad Network Access</h3>
+          <p>
+            Layanan cloud dapat diakses melalui jaringan dari berbagai perangkat, seperti laptop,
+            smartphone, tablet, dan workstation.
+          </p>
+        </article>
+
+        <article>
+          <div class="icon">3</div>
+          <h3>Measured Service</h3>
+          <p>
+            Penggunaan resource dapat dipantau, diukur, dan dilaporkan berdasarkan parameter
+            seperti storage, bandwidth, processing, dan jumlah pengguna aktif.
+          </p>
+        </article>
+
+        <article>
+          <div class="icon">4</div>
+          <h3>Rapid Elasticity</h3>
+          <p>
+            Kapasitas layanan dapat dinaikkan atau diturunkan dengan cepat sesuai kebutuhan
+            pengguna atau beban kerja.
+          </p>
+        </article>
+
+        <article>
+          <div class="icon">5</div>
+          <h3>Self Service</h3>
+          <p>
+            Pengguna dapat mengatur layanan secara mandiri, seperti menambah kapasitas atau
+            membuat server virtual tanpa interaksi langsung dengan penyedia layanan.
+          </p>
+        </article>
+
+        <article>
+          <div class="icon">6</div>
+          <h3>Pay as You Go</h3>
+          <p>
+            Biaya cloud mengikuti penggunaan. Organisasi membayar resource yang dipakai,
+            bukan membeli seluruh infrastruktur dari awal.
+          </p>
+        </article>
+      </div>
     </section>
 
-    <section id="framework" class="section split reveal">
+    <section id="layanan" class="section container reveal">
+      <p class="tag">Jenis Layanan</p>
+      <h2>SaaS, PaaS, dan IaaS</h2>
+
+      <div class="cards">
+        <article>
+          <div class="icon">S</div>
+          <h3>Software as a Service</h3>
+          <p>
+            SaaS adalah layanan cloud yang menyediakan software siap pakai. Contohnya Gmail,
+            Google Docs, Office 365, Adobe Creative Cloud, dan aplikasi bisnis online.
+            Pengguna tidak perlu mengelola server atau instalasi aplikasi secara manual.
+          </p>
+        </article>
+
+        <article>
+          <div class="icon">P</div>
+          <h3>Platform as a Service</h3>
+          <p>
+            PaaS menyediakan platform untuk menjalankan dan mengembangkan aplikasi. Pengembang
+            dapat fokus membangun aplikasi tanpa harus mengurus server, sistem operasi, database,
+            atau runtime secara langsung.
+          </p>
+        </article>
+
+        <article>
+          <div class="icon">I</div>
+          <h3>Infrastructure as a Service</h3>
+          <p>
+            IaaS menyediakan infrastruktur virtual seperti CPU, RAM, storage, dan jaringan.
+            Pengguna dapat menyewa virtual machine dan mengatur kapasitas sesuai kebutuhan.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="deployment" class="section container reveal">
+      <p class="tag">Deployment Model</p>
+      <h2>Model Penerapan Cloud</h2>
+
+      <div class="cards four">
+        <article>
+          <h3>Public Cloud</h3>
+          <p>
+            Layanan cloud tersedia untuk umum dan dikelola oleh penyedia cloud. Contohnya layanan
+            seperti Gmail, Office 365, Google Apps, dan berbagai layanan cloud publik lainnya.
+          </p>
+        </article>
+
+        <article>
+          <h3>Private Cloud</h3>
+          <p>
+            Layanan cloud digunakan untuk kebutuhan internal organisasi. Model ini memberikan
+            kontrol lebih besar terhadap keamanan, konfigurasi, dan data.
+          </p>
+        </article>
+
+        <article>
+          <h3>Hybrid Cloud</h3>
+          <p>
+            Hybrid cloud menggabungkan public cloud dan private cloud. Model ini digunakan untuk
+            menyeimbangkan fleksibilitas, kontrol, keamanan, dan efisiensi biaya.
+          </p>
+        </article>
+
+        <article>
+          <h3>Community Cloud</h3>
+          <p>
+            Community cloud dibangun untuk komunitas tertentu yang memiliki kebutuhan, standar,
+            kebijakan, atau kepentingan yang sama.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="manfaat" class="section container split reveal">
       <div>
-        <p class="tag">3 fase framework</p>
-        <h2>Inform, Optimize, Operate</h2>
+        <p class="tag">Manfaat</p>
+        <h2>Kelebihan Cloud Computing</h2>
+
         <ol class="phase-list">
           <li>
-            <strong>Inform</strong>
-            <span>Meningkatkan visibilitas biaya melalui tagging, alokasi biaya, dan pelaporan yang akurat.</span>
+            <div>
+              <strong>Skalabilitas</strong>
+              <span>Kapasitas server, storage, dan layanan dapat ditambah atau dikurangi sesuai kebutuhan.</span>
+            </div>
           </li>
           <li>
-            <strong>Optimize</strong>
-            <span>Mencari peluang penghematan seperti rightsizing, reserved instances, spot instances, dan menghentikan resource idle.</span>
+            <div>
+              <strong>Efisiensi Biaya</strong>
+              <span>Cloud menggunakan model pay-as-you-go sehingga mengurangi investasi awal perangkat keras.</span>
+            </div>
           </li>
           <li>
-            <strong>Operate</strong>
-            <span>Mengintegrasikan efisiensi biaya ke proses harian melalui governance, KPI, metrics, dan policy enforcement.</span>
+            <div>
+              <strong>Aksesibilitas</strong>
+              <span>Layanan dapat diakses dari berbagai lokasi selama pengguna terhubung ke internet.</span>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>Pemulihan Data</strong>
+              <span>Penyedia cloud umumnya menyediakan backup, enkripsi, dan sistem keamanan tambahan.</span>
+            </div>
           </li>
         </ol>
       </div>
-      <div class="panel floating-card">
-        <h3>Contoh penerapan</h3>
+
+      <div class="panel">
+        <p class="tag">Tantangan</p>
+        <h3>Tantangan Cloud Computing</h3>
         <p>
-          Setiap resource cloud diberi tag berdasarkan proyek dan pemilik. Lalu dashboard biaya digunakan
-          untuk mendeteksi lonjakan biaya dengan cepat. Setelah itu, tim engineering melakukan rightsizing
-          server dan menetapkan aturan agar resource mahal tidak dibuat sembarangan.
+          Cloud computing juga memiliki tantangan. Beberapa di antaranya adalah ketergantungan
+          pada koneksi internet, risiko keamanan dan privasi data, keterbatasan kontrol terhadap
+          infrastruktur, serta kebutuhan integrasi antara aplikasi lama dan sistem cloud.
+        </p>
+        <br />
+        <p>
+          Karena itu, penggunaan cloud perlu dirancang dengan strategi yang matang, termasuk
+          pengelolaan keamanan, pemantauan biaya, dan tata kelola operasional.
         </p>
       </div>
     </section>
 
-    <section class="section reveal">
+    <section id="tren" class="section container reveal">
+      <p class="tag">Perkembangan Teknologi</p>
+      <h2>Tren Cloud Computing</h2>
+
+      <div class="cards">
+        <article>
+          <div class="icon">H</div>
+          <h3>Hybrid dan Multi-Cloud</h3>
+          <p>
+            Organisasi semakin sering memakai kombinasi public cloud, private cloud, dan beberapa
+            penyedia cloud sekaligus agar lebih fleksibel dan tidak bergantung pada satu vendor.
+          </p>
+        </article>
+
+        <article>
+          <div class="icon">AI</div>
+          <h3>AI dan Machine Learning</h3>
+          <p>
+            Cloud mendukung layanan AI dan machine learning untuk otomasi, analisis data,
+            prediksi, rekomendasi, dan pengembangan layanan digital yang lebih cerdas.
+          </p>
+        </article>
+
+        <article>
+          <div class="icon">CN</div>
+          <h3>Cloud Native</h3>
+          <p>
+            Teknologi seperti Docker, Kubernetes, dan containerization membantu deployment,
+            scaling, dan pengelolaan aplikasi modern secara lebih cepat dan konsisten.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="finops" class="section container reveal">
+      <p class="tag">Financial Operations</p>
+      <h2>Introduction to FinOps</h2>
+      <p class="lead">
+        FinOps adalah praktik budaya dan kerangka kerja operasional yang menyatukan tim teknologi,
+        keuangan, dan bisnis. Tujuannya bukan sekadar mengurangi biaya cloud, tetapi memaksimalkan
+        nilai bisnis dari setiap biaya cloud yang dikeluarkan.
+      </p>
+      <br />
+      <p class="lead">
+        Pada model tradisional, perusahaan memakai CapEx atau investasi besar di awal untuk membeli
+        perangkat keras. Pada model cloud, biaya berubah menjadi OpEx berbasis pemakaian. Model ini
+        fleksibel, tetapi juga dapat menjadi sulit diprediksi tanpa pengelolaan biaya yang baik.
+      </p>
+
+      <div class="quote">
+        FinOps membantu organisasi menjawab pertanyaan penting: “Apakah biaya cloud yang kita
+        keluarkan sudah sebanding dengan nilai bisnis yang dihasilkan?”
+      </div>
+    </section>
+
+    <section class="section container reveal">
+      <p class="tag">Framework FinOps</p>
+      <h2>Inform, Optimize, Operate</h2>
+
+      <div class="cards">
+        <article>
+          <div class="icon">I</div>
+          <h3>Inform</h3>
+          <p>
+            Tahap ini berfokus pada visibilitas biaya. Organisasi perlu memahami biaya cloud,
+            melakukan tagging, alokasi biaya, dashboard, dan pelaporan yang jelas.
+          </p>
+        </article>
+
+        <article>
+          <div class="icon">O</div>
+          <h3>Optimize</h3>
+          <p>
+            Tahap ini mencari peluang penghematan seperti rightsizing, reserved instances,
+            spot instances, menghapus resource idle, dan memilih layanan yang lebih efisien.
+          </p>
+        </article>
+
+        <article>
+          <div class="icon">R</div>
+          <h3>Operate</h3>
+          <p>
+            Tahap ini mengintegrasikan efisiensi biaya ke operasional harian melalui governance,
+            KPI, metrics, policy enforcement, dan kolaborasi antar tim.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section container reveal">
       <p class="tag">Stakeholder</p>
-      <h2>Peran Pemangku Kepentingan</h2>
+      <h2>Pemangku Kepentingan dalam FinOps</h2>
+
       <div class="table-wrap">
         <table>
           <thead>
@@ -139,67 +986,150 @@
           <tbody>
             <tr>
               <td>Engineering</td>
-              <td>Membangun dan mengelola infrastruktur</td>
-              <td>Efisiensi penggunaan dan rightsizing</td>
+              <td>Membangun, menjalankan, dan mengelola infrastruktur serta aplikasi cloud.</td>
+              <td>Efisiensi penggunaan resource, rightsizing, dan pengurangan resource idle.</td>
             </tr>
             <tr>
               <td>Finance</td>
-              <td>Mengelola anggaran dan pelaporan</td>
-              <td>Prediksi biaya dan alokasi anggaran</td>
+              <td>Mengelola anggaran, pelaporan biaya, dan perencanaan keuangan.</td>
+              <td>Prediksi biaya, kontrol anggaran, chargeback, dan showback.</td>
             </tr>
             <tr>
               <td>Product Owner</td>
-              <td>Menentukan strategi produk</td>
-              <td>Analisis biaya per fitur</td>
+              <td>Menentukan strategi produk dan memastikan fitur memberikan nilai bagi pengguna.</td>
+              <td>Analisis biaya per fitur, produk, pelanggan, atau transaksi bisnis.</td>
             </tr>
             <tr>
               <td>Executive</td>
-              <td>Mengambil keputusan strategis</td>
-              <td>ROI dan pertumbuhan bisnis</td>
+              <td>Mengambil keputusan strategis berdasarkan biaya, performa, dan pertumbuhan bisnis.</td>
+              <td>ROI, efisiensi organisasi, dan nilai bisnis dari investasi cloud.</td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <section class="section maturity reveal">
-      <p class="tag">Maturity model</p>
+    <section class="section container split reveal">
+      <div>
+        <p class="tag">Unit Economics</p>
+        <h2>Mengukur Nilai Bisnis Cloud</h2>
+        <p>
+          FinOps tidak hanya menanyakan “berapa total biaya cloud?”, tetapi juga “berapa biaya
+          untuk menghasilkan satu transaksi bisnis?”. Pendekatan ini disebut unit economics.
+        </p>
+        <br />
+        <p>
+          Contohnya, organisasi dapat menghitung biaya cloud per pengguna, per transaksi,
+          per pesanan, per fitur, atau per layanan. Dengan begitu, biaya cloud dapat
+          dihubungkan langsung dengan nilai bisnis.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h3>Contoh Pertanyaan Unit Economics</h3>
+        <ol class="phase-list">
+          <li>
+            <div>
+              <strong>Biaya per pelanggan</strong>
+              <span>Berapa biaya cloud untuk melayani satu pelanggan aktif?</span>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>Biaya per transaksi</strong>
+              <span>Berapa biaya cloud untuk memproses satu transaksi?</span>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>Biaya per fitur</strong>
+              <span>Fitur mana yang paling mahal dan apakah nilainya sebanding?</span>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section container maturity reveal">
+      <p class="tag">Maturity Model</p>
       <h2>Crawl - Walk - Run</h2>
+
       <div class="timeline">
-        <div class="floating-card delay-1">
+        <div class="floating-card">
           <span>1</span>
           <h3>Crawl</h3>
-          <p>Mulai dengan visibilitas dasar dan tagging. Sebagian besar proses masih manual.</p>
+          <p>
+            Organisasi mulai membuat visibilitas dasar biaya, tagging, dan laporan sederhana.
+            Proses masih banyak dilakukan secara manual.
+          </p>
         </div>
-        <div class="floating-card delay-2">
+
+        <div class="floating-card">
           <span>2</span>
           <h3>Walk</h3>
-          <p>Kebijakan optimasi mulai dilakukan secara rutin dan kolaborasi antar tim mulai terbentuk.</p>
+          <p>
+            Kebijakan optimasi mulai dilakukan secara rutin. Kolaborasi antara engineering,
+            finance, dan bisnis mulai terbentuk.
+          </p>
         </div>
-        <div class="floating-card delay-3">
+
+        <div class="floating-card">
           <span>3</span>
           <h3>Run</h3>
-          <p>Otomasi semakin matang; biaya cloud dipantau sebagai nilai strategis bisnis secara real-time.</p>
+          <p>
+            Otomasi berjalan matang. Biaya cloud dipantau sebagai nilai strategis bisnis
+            secara real-time dan menjadi bagian dari keputusan operasional.
+          </p>
         </div>
       </div>
     </section>
 
-    <section id="kesimpulan" class="section conclusion reveal">
-      <p class="tag">Penutup</p>
-      <h2>Kesimpulan</h2>
-      <p>
-        FinOps penting karena cloud menawarkan fleksibilitas tinggi, tetapi juga membawa risiko pemborosan biaya.
-        Dengan visibilitas biaya yang baik, optimasi resource, dan governance harian, organisasi dapat menggunakan
-        cloud secara lebih efisien, transparan, dan tetap selaras dengan tujuan bisnis.
-      </p>
-      <p class="source">Sumber materi: PDF kuliah “Cloud Computing &amp; Introduction to FinOps”.</p>
+    <section id="kesimpulan" class="section container reveal">
+      <p class="tag">Kesimpulan</p>
+      <h2>Cloud Memberi Fleksibilitas, FinOps Memberi Kendali</h2>
+
+      <div class="summary-box">
+        <p>
+          Cloud computing memberikan kemudahan dalam mengakses resource komputasi secara
+          fleksibel, cepat, dan skalabel. Namun, fleksibilitas ini juga membuat biaya cloud
+          dapat berubah dengan cepat jika tidak dikelola secara benar.
+        </p>
+
+        <ul>
+          <li>Cloud computing membantu organisasi mengakses teknologi tanpa harus membeli infrastruktur sendiri.</li>
+          <li>SaaS, PaaS, dan IaaS memberikan pilihan layanan sesuai kebutuhan pengguna.</li>
+          <li>Public, private, hybrid, dan community cloud digunakan sesuai kebutuhan keamanan, kontrol, dan fleksibilitas.</li>
+          <li>FinOps menyatukan teknologi, keuangan, dan bisnis untuk mengelola biaya cloud secara bertanggung jawab.</li>
+          <li>Tujuan akhir FinOps bukan hanya penghematan, tetapi memaksimalkan nilai bisnis dari penggunaan cloud.</li>
+        </ul>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>Website rangkuman materi kuliah - Introduction to FinOps</p>
+    <div class="container">
+      <p>Cloud Computing & FinOps Summary Website</p>
+      <p>Disusun sebagai rangkuman pembelajaran tentang teknologi cloud dan pengelolaan biaya cloud.</p>
+    </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    const reveals = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+    reveals.forEach(section => observer.observe(section));
+  </script>
 </body>
 </html>
