@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rangkuman Kuliah - Introduction to FinOps</title>
+  <meta name="description" content="Website rangkuman materi kuliah Cloud Computing - Introduction to FinOps" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-grid"></div>
+
+  <header class="hero">
+    <nav>
+      <span class="logo">FinOps Insight</span>
+      <div class="nav-links">
+        <a href="#rangkuman">Rangkuman</a>
+        <a href="#framework">Framework</a>
+        <a href="#kesimpulan">Kesimpulan</a>
+      </div>
+    </nav>
+
+    <section class="hero-content reveal">
+      <p class="tag">Materi Kuliah Cloud Computing</p>
+      <h1>Introduction to <span>FinOps</span></h1>
+      <p>
+        Ringkasan singkat mengenai konsep Financial Operations untuk membantu organisasi
+        mengelola biaya cloud secara efisien, transparan, dan selaras dengan nilai bisnis.
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href="#rangkuman">Mulai Membaca</a>
+        <a class="button secondary" href="#framework">Lihat Framework</a>
+      </div>
+    </section>
+
+    <div class="hero-stats reveal">
+      <div class="stat-card floating-card delay-1">
+        <span>Fokus Utama</span>
+        <strong>Efisiensi biaya cloud</strong>
+      </div>
+      <div class="stat-card floating-card delay-2">
+        <span>Framework</span>
+        <strong>Inform • Optimize • Operate</strong>
+      </div>
+      <div class="stat-card floating-card delay-3">
+        <span>Tujuan</span>
+        <strong>Maksimalkan nilai bisnis</strong>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="rangkuman" class="section reveal">
+      <p class="tag">Pertemuan yang dipilih</p>
+      <h2>Definisi dan Latar Belakang FinOps</h2>
+      <p>
+        FinOps atau <em>Financial Operations</em> adalah praktik budaya sekaligus kerangka kerja operasional
+        yang menyatukan tim teknologi, keuangan, dan bisnis. Tujuannya bukan hanya memangkas biaya,
+        tetapi memaksimalkan nilai bisnis dari setiap biaya cloud yang dikeluarkan.
+      </p>
+      <p>
+        Pada model tradisional, perusahaan mengeluarkan investasi besar di awal untuk membeli infrastruktur
+        fisik. Sedangkan pada model cloud, biaya berubah menjadi biaya operasional berbasis pemakaian
+        (<em>pay-as-you-go</em>). Model ini fleksibel, namun jika tidak dikelola dengan baik bisa memunculkan
+        pemborosan dan biaya yang sulit diprediksi.
+      </p>
+    </section>
+
+    <section class="cards reveal">
+      <article>
+        <h3>Masalah Utama</h3>
+        <p>
+          Banyak biaya cloud terbuang karena resource yang idle, tidak efisien, atau dibuat melebihi kebutuhan.
+          Hal ini sering terjadi karena kurangnya monitoring, tagging, dan kebijakan penggunaan resource.
+        </p>
+      </article>
+      <article>
+        <h3>Tujuan FinOps</h3>
+        <p>
+          FinOps membantu organisasi memahami biaya cloud, menemukan peluang penghematan, dan membangun
+          tanggung jawab bersama antara tim engineering, finance, product owner, dan eksekutif.
+        </p>
+      </article>
+      <article>
+        <h3>Nilai Bisnis</h3>
+        <p>
+          FinOps tidak hanya bertanya “berapa biayanya?”, tetapi juga “berapa biaya untuk menghasilkan satu
+          transaksi atau satu unit nilai bisnis?”. Inilah yang membuat FinOps berorientasi pada hasil.
+        </p>
+      </article>
+    </section>
+
+    <section id="framework" class="section split reveal">
+      <div>
+        <p class="tag">3 fase framework</p>
+        <h2>Inform, Optimize, Operate</h2>
+        <ol class="phase-list">
+          <li>
+            <strong>Inform</strong>
+            <span>Meningkatkan visibilitas biaya melalui tagging, alokasi biaya, dan pelaporan yang akurat.</span>
+          </li>
+          <li>
+            <strong>Optimize</strong>
+            <span>Mencari peluang penghematan seperti rightsizing, reserved instances, spot instances, dan menghentikan resource idle.</span>
+          </li>
+          <li>
+            <strong>Operate</strong>
+            <span>Mengintegrasikan efisiensi biaya ke proses harian melalui governance, KPI, metrics, dan policy enforcement.</span>
+          </li>
+        </ol>
+      </div>
+      <div class="panel floating-card">
+        <h3>Contoh penerapan</h3>
+        <p>
+          Setiap resource cloud diberi tag berdasarkan proyek dan pemilik. Lalu dashboard biaya digunakan
+          untuk mendeteksi lonjakan biaya dengan cepat. Setelah itu, tim engineering melakukan rightsizing
+          server dan menetapkan aturan agar resource mahal tidak dibuat sembarangan.
+        </p>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <p class="tag">Stakeholder</p>
+      <h2>Peran Pemangku Kepentingan</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Persona</th>
+              <th>Tanggung Jawab</th>
+              <th>Fokus FinOps</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Engineering</td>
+              <td>Membangun dan mengelola infrastruktur</td>
+              <td>Efisiensi penggunaan dan rightsizing</td>
+            </tr>
+            <tr>
+              <td>Finance</td>
+              <td>Mengelola anggaran dan pelaporan</td>
+              <td>Prediksi biaya dan alokasi anggaran</td>
+            </tr>
+            <tr>
+              <td>Product Owner</td>
+              <td>Menentukan strategi produk</td>
+              <td>Analisis biaya per fitur</td>
+            </tr>
+            <tr>
+              <td>Executive</td>
+              <td>Mengambil keputusan strategis</td>
+              <td>ROI dan pertumbuhan bisnis</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section maturity reveal">
+      <p class="tag">Maturity model</p>
+      <h2>Crawl - Walk - Run</h2>
+      <div class="timeline">
+        <div class="floating-card delay-1">
+          <span>1</span>
+          <h3>Crawl</h3>
+          <p>Mulai dengan visibilitas dasar dan tagging. Sebagian besar proses masih manual.</p>
+        </div>
+        <div class="floating-card delay-2">
+          <span>2</span>
+          <h3>Walk</h3>
+          <p>Kebijakan optimasi mulai dilakukan secara rutin dan kolaborasi antar tim mulai terbentuk.</p>
+        </div>
+        <div class="floating-card delay-3">
+          <span>3</span>
+          <h3>Run</h3>
+          <p>Otomasi semakin matang; biaya cloud dipantau sebagai nilai strategis bisnis secara real-time.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="kesimpulan" class="section conclusion reveal">
+      <p class="tag">Penutup</p>
+      <h2>Kesimpulan</h2>
+      <p>
+        FinOps penting karena cloud menawarkan fleksibilitas tinggi, tetapi juga membawa risiko pemborosan biaya.
+        Dengan visibilitas biaya yang baik, optimasi resource, dan governance harian, organisasi dapat menggunakan
+        cloud secara lebih efisien, transparan, dan tetap selaras dengan tujuan bisnis.
+      </p>
+      <p class="source">Sumber materi: PDF kuliah “Cloud Computing &amp; Introduction to FinOps”.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Website rangkuman materi kuliah - Introduction to FinOps</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
